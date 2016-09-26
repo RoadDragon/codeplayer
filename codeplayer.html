@@ -1,0 +1,238 @@
+
+
+<html>
+
+    <head>
+        
+        <title>jQuery</title>
+        
+        <meta charset="utf-8">
+ 
+        <script type="text/javascript" src="jquery.min.js"></script>
+        
+        <script src="jquery-ui/jquery-ui.js"></script>
+        
+        <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+       
+        <style>
+            #resizable { 
+                background-position: top left; 
+                background-color:blue;
+            }
+            
+            #resizable, #also { 
+                width: 150px; 
+                height: 120px; 
+                padding: 0.5em; 
+            }
+            
+            #resizable h3, #also h3 { 
+                text-align: center; 
+                margin: 0; 
+            }
+            
+            #also { 
+                margin-top: 1em; 
+                background-color:red;
+            }
+            
+            #draggable { 
+                width: 150px; 
+                height: 150px; 
+                padding: 0.5em; 
+            }
+            
+            #container-wrapper {
+                width:500px;
+                height:300px;
+                background-color:yellow;
+                border: 2ps solid #ccc;
+                padding: 10px;
+            }
+            
+            #dropMe {
+                width: 100px; 
+                height: 100px; 
+                padding: 0.5em; 
+                margin-top:15px;
+                background-color: indigo;
+            }
+            
+            #dropOnMe {
+                width: 200px; 
+                height: 200px; 
+                padding: 0.5em; 
+                background-color: hotpink;
+            }
+            
+            #sortable {
+                list-style-type:none;
+                margin: 0 30px 0 0; 
+                padding: 0; 
+                width: 60%;
+            }
+            
+            #sortable li { 
+                margin: 0 3px 3px 3px; 
+                padding: 0.4em; 
+                padding-left: 1.5em; 
+                font-size: 1.4em; 
+                height: 18px; 
+                border: 1px black solid;
+                border-radius: 15px;
+                background-color: gold;
+                width:400px;
+            }
+         
+        </style>
+       
+        
+    </head>
+
+    <body>
+        
+        <div id="accordion">
+        
+            <h3>Section 1: A Buddhist Prayer for Peace</h3>
+            <div>
+            <p>
+            May all beings everywhere plagued with sufferings of body and mind quickly be freed from their illnesses. 
+            May those frightened cease to be afraid, and may those bound be free. 
+            May the powerless find power and may people think of befriending one another. 
+            May those who find themselves in trackless, fearful wildernesses - the children, the aged, the unprotected - be guarded by beneficent celestials, and may they swiftly attain Buddhahood. 
+             - U.N. Day of Prayer for World Peace
+            </p>
+            </div>
+            
+            <h3>Section 2: Earth Prayer</h3>
+            <div>
+            <p>
+            We gently caress you, the Earth, our planet and our home. 
+            Our vision has brought us closer to you, making us aware of the harm we have done to the life-network upon which we ourselves depend. 
+            We are reminded that we have poisoned your waters, your lands, your air.  
+            We have filled you with the bones of our dead from war and greed.  
+            Your pain is our pain. 
+            Touching you gently, we pray that we may become peace-bringers and life-bringers so that our home in its journey around the Sun not become a sterile and lonely place.  
+            May this prayer and its power last forever.   
+             - Sensei Ulrich, Manitoba Buddhist Temple
+            </p>
+            </div>
+            
+            <h3>Section 3: Water Flows</h3>
+            <div>
+            <p>
+            Water flows over these hands.
+            May I use them skillfully
+            to preserve our precious planet.
+             - Thich Nhat Hahn
+            </p>
+            </div>
+            
+            <h3>Section 4: Well, Happy and Peaceful</h3>
+            <div>
+            <p>
+            May I be well, happy, and peaceful.
+            May my teachers be well, happy, and peaceful.
+            May my parents be well, happy, and peaceful.
+            May my relatives be well, happy, and peaceful.
+            May my friends be well, happy, and peaceful.
+            May the indifferent persons be well, happy, and peaceful.
+            May the unfriendly persons be well, happy, and peaceful.
+            May all meditators be well, happy, and peaceful.
+            May all beings be well, happy, and peaceful.
+             - Buddhist Prayer
+            </p>
+            </div>
+        
+            <!-- From the website: http://www.worldhealingprayers.com/3.html -->
+       
+        </div>
+        
+        <H2>Sort Your Favorite Buddhist Prayers (Favorite goes on Top!)</H2>
+        <ul id="sortable">
+            <li>A Buddhist Prayer for Peace</li>
+            <li>Earth Prayer</li>
+            <li>Water Flows</li>
+            <li>Well, Happy and Peaceful</li>
+        </ul>
+        
+        
+        
+        <div id="dropMe">
+            <p>Drag Me to Target</p>
+        </div>
+        
+        <div id="dropOnMe">
+            <p>Drop Here</p>
+        </div>
+        
+        
+        
+        <div id="draggable" class="ui-widget-content">
+            <p>Drag me horizontally</p>
+        </div>
+        
+        <div id="container-wrapper">
+            <span id="draggable4">I'm stuck in this box!</span>
+        
+        
+        </div>
+        
+        <div id="resizable" class="ui-widget-header">
+            <h3 class="ui-state-active">Resize</h3>
+        </div>
+        
+        <div id="also" class="ui-widget-content">
+            <h3 class="ui-widget-header">will also resize</h3>
+        </div>
+        
+        
+        
+        
+
+        <script type="text/javascript">
+            
+            $( function() {
+                $( "#accordion" ).accordion();
+              } );
+
+            $( function() {
+                $( "#sortable" ).sortable();
+                $( "#sortable" ).disableSelection();
+              } );
+           
+             $( "#draggable" ).draggable({axis: "x"});
+            
+            $( "#draggable4").draggable({ containment: "parent" });
+            
+            
+            $( "#resizable" ).resizable({
+                grid:50,
+                alsoResize: "#also",
+                resize: function( event, ui ) {
+                    
+                    if ($("#resizable").width() > 300) {
+                        
+                        alert("big enough!");
+                    }
+                }
+    });
+            
+            $( "#also" ).resizable();
+            
+            $("#dropMe").draggable();
+            $( "#dropOnMe" ).droppable({
+                drop: function( event, ui ) {
+               
+                        alert("Dropped!");
+      }
+    });
+       
+           
+           
+          
+        </script>
+        
+    </body>
+
+</html>
