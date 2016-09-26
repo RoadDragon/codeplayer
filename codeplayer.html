@@ -46,8 +46,15 @@
                 
             }
             
-            #codeButtons {
+            .toggler {
+                position:relative;
+                float:left;
+            }
+            
+            #codeButtons tabs {
                 margin: 0 auto;
+                border: 1px #888888 solid;
+                border-spacing:0;
                 
             }
             
@@ -62,14 +69,20 @@
             
             td {
                 border-right: 1px #888888 solid;
-                padding:7px 6px;
+                padding:5px 5px;
                 margin:0;
+                border-spacing:0;
             }
             
          
             
-            #output {
+            #outputButton {
                 border-right:none !important;
+            }
+            
+            td a {
+                text-decoration: none;
+                color:black;
             }
             
             .clear {
@@ -92,8 +105,8 @@
             #userHTML {
                 width:24%;
             }
-            
-            #output {
+          
+            #content {
                 border-right:none !important;
             }
             
@@ -105,50 +118,109 @@
 
     <body>
         
-        <div id="navbar">
         
-            <h3>CodePlayer</h3>
         
-            <div id="button_wrapper">
-        
-                <table id="codeButtons">
-                    
-                    <tr>
-                        <td>HTML</td>
-                        <td>CSS</td>
-                        <td>JavaScript</td>
-                        <td id="output">Output</td>
-                    
-                    </tr>
-                    
-                </table>
-        
+            <div id="navbar">
+
+                <h3>CodePlayer</h3>
+
+                    <div id="button_wrapper">
+
+                       
+
+                        <table id="codeButtons">
+
+                            <tr>
+                                <td class="toggler" id="htmlButton"><a href="#tabs-1">HTML</a></td>
+                                <td class="toggler" id="cssButton"><a href="#tabs-2">CSS</a></td>
+                                <td class="toggler" id="jsButton"><a href="#tabs-3">JavaScript</a></td>
+                                <td class="toggler" id="outputButton"><a href="#tabs-4">Output</a></td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <div class="clear"></div>
+
+                <div id="codeContainer">
+
+                    <div class="codeSpace" id="tabs-1">html</div>
+
+                    <div class="codeSpace" id="tabs-2">css</div>
+
+                    <div class="codeSpace" id="tabs-3">js</div>
+
+                    <div class="codeSpace" id="tabs-4">content</div>
+
             </div>
             
-        </div>
-        
-        <div class="clear"></div>
-        
-        <div id="codeContainer">
-        
-            <div class="codeSpace" id="userHTML">html</div>
-            
-            <div class="codeSpace" id="userCSS">css</div>
-            
-            <div class="codeSpace" id="userJS">js</div>
-            
-            <div class="codeSpace" id="content">content</div>
-        
-        </div>
         
         
        
         <script type="text/javascript">
-            
 
+            $( "#codeButtons" ).tab();
             
             
             
+            $( "#htmlButton").click(function() {
+                
+                if ($("#tabs-1").css("display") == "none") {
+
+                $("#tabs-1").fadeIn();
+            
+                } else  {
+            
+                $("#tabs-1").fadeOut();
+                
+            }
+            });
+                
+              
+        $( "#cssButton").click(function() {
+                
+                if ($("#tabs-2").css("display") == "none") {
+
+                $("#tabs-2").fadeIn();
+            
+                } else  {
+            
+                $("#tabs-2").fadeOut();
+                
+            }
+            });
+            
+          
+            $( "#jsButton").click(function() {
+                
+                if ($("#tabs-3").css("display") == "none") {
+
+                $("#tabs-3").fadeIn();
+            
+                } else  {
+            
+                $("#tabs-3").fadeOut();
+                
+            }
+            });
+            
+            
+            $( "#outputButton").click(function() {
+                
+                if ($("#tabs-4").css("display") == "none") {
+
+                $("#tabs-4").fadeIn();
+            
+                } else  {
+            
+                $("#tabs-4").fadeOut();
+                
+            }
+            });
             
             
           

@@ -1,0 +1,180 @@
+
+
+<html>
+
+    <head>
+    
+    <!-- crazy-branch1.html is my attempt to put buttons in my table in the navbar -->
+        
+        <title>jQuery</title>
+        
+        <meta charset="utf-8">
+ 
+        <script type="text/javascript" src="jquery.min.js"></script>
+        
+        <script src="jquery-ui/jquery-ui.js"></script>
+        
+        <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+       
+        <style>
+       
+            * {
+                margin:0px;
+                padding:0px;
+            }
+            
+            body {
+                font-family: sans-serif;
+            }
+            
+            #navbar {
+                background-color:#ededed;
+                width: 100%;
+                height:43px;
+            }
+            
+            h3 {
+                position: relative;
+                float:left;
+                
+                padding-top: 10px;
+                padding-left: 10px;
+                font-size: 22px;
+            }
+            
+            #button_wrapper {
+                width: 260px;
+                margin: 0 auto;
+                
+            }
+            
+            #codeButtons {
+                margin: 0 auto;
+                border: 1px #888888 solid;
+                
+                border-top:none;
+                border-bottom: none;
+                
+            }
+            
+            table {
+                position:relative;
+                top: 5px;
+                
+                padding:0;
+                border-radius: 8px; 
+                border-spacing:0;
+            }
+            
+            button {
+                
+                border: 1px #888888 solid;
+        /*      border-right: 1px #888888 solid;
+                border-left:none;
+                border-top:none;
+                border-bottom: none;       */
+                border-spacing:0;
+                padding:7px 6px;
+                margin:0;
+                line-height: normal; 
+                font-weight: normal;
+                font-size: medium;
+                font-family: sans-serif;
+                background-color: #ededed;
+                border-right:none !important;
+            }
+            
+
+            }
+            
+            #outputButton {
+                border-right:none !important;
+            }
+            
+            .clear {
+                clear:both;
+            }
+            
+            #codeContainer {
+                width:100%;
+                height:100%;
+            }
+            
+            .codeSpace {
+                width:25%;
+                border-right: 1px grey solid;
+                position:relative;
+                float:left;
+                height: 100%;
+            }
+            
+            #userHTML {
+                width:24%;
+            }
+            
+            #content {
+                border-right:none !important;
+            }
+            
+            
+        </style>
+       
+        
+    </head>
+
+    <body>
+        
+        <div id="navbar">
+        
+            <h3>CodePlayer</h3>
+        
+            <div id="button_wrapper">
+        
+                <table id="codeButtons">
+                    
+
+                    
+                    <tr>
+                        <td><button id="htmlButton">HTML</button></td>
+                        <td><button>CSS</button></td>
+                        <td><button>JavaScript</button></td>
+                        <td><button id="outputButton">Output</button></td>
+                    
+                    </tr>
+                    
+                </table>
+        
+            </div>
+            
+        </div>
+        
+        <div class="clear"></div>
+        
+        <div id="codeContainer">
+        
+            <div class="codeSpace" id="userHTML">html</div>
+            
+            <div class="codeSpace" id="userCSS">css</div>
+            
+            <div class="codeSpace" id="userJS">js</div>
+            
+            <div class="codeSpace" id="content">content</div>
+        
+        </div>
+        
+        
+       
+        <script type="text/javascript">
+            
+
+            
+            
+            
+            
+            
+          
+        </script>
+        
+    </body>
+
+</html>
