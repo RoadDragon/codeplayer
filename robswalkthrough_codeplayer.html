@@ -1,0 +1,214 @@
+
+
+<html>
+
+    <head>
+        
+        <title>jQuery</title>
+        
+        <meta charset="utf-8">
+ 
+        <script type="text/javascript" src="jquery.min.js"></script>
+        
+        <script src="jquery-ui/jquery-ui.js"></script>
+        
+        <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+       
+        <style type="text/css">
+       
+            * {
+                margin:0px;
+                padding:0px;
+            }
+            
+            body {
+                font-family: sans-serif;
+            }
+            
+            #header {
+                background-color:#EEEEEE;
+                width: 100%;
+                padding:5px;
+                height:30px;
+            }
+            
+            #logo {
+                float:left;
+                font-weight:bold;
+                font-size:120%;
+                padding: 3px 5px;
+            }
+            
+            #buttonContainer {
+                width: 233px;
+                margin: 0 auto;
+            }
+            
+            .toggleButton {
+                float:left;
+                border:1px solid grey;
+                padding:6px;
+                border-right:none;
+                font-size:90%;
+            }
+            
+            #html {
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+            
+            #output {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+                border-right:1px solid grey;
+            }
+            
+            .active {
+                background-color:#E8F2FF;
+            }
+            
+            .highlightedButton {
+                
+                background-color:grey;
+            }
+            
+            textarea {
+                resize:none;
+                border-top:none;
+                border-color:grey;
+            }
+            
+            .panel {
+                float:left;
+                width:50%;
+                border-left: none;
+            }
+           
+            iframe {
+                border:none;
+            }
+            
+            .hidden {
+                display: none;
+            }
+            
+            
+            
+        </style>
+       
+        
+    </head>
+
+    <body>
+        
+        <div id="header">
+        
+                <div id="logo">
+
+                    CodePlayer
+
+                </div>
+            
+            <div id="buttonContainer">
+            
+                <div class="toggleButton active" id="html">HTML</div>
+                <div class="toggleButton" id="css">CSS</div>
+                <div class="toggleButton" id="javascript">JavaScript</div>
+                <div class="toggleButton active" id="output">Output</div>
+            
+            
+            </div>
+   
+        </div>
+        
+        <div id="bodyContainer">
+        
+            <textarea id="htmlPanel" class="panel"><p id="paragraph">Hello World</p></textarea>
+            
+            <textarea id="cssPanel" class="panel hidden">p { color: green; } </textarea>
+            
+            <textarea id="javascriptPanel" class="panel hidden">document.getElementById("paragraph").innerHTML = "Hello Leslie";</textarea>
+            
+            <iframe id="outputPanel" class="panel"></iframe>
+        
+        </div>
+        
+        
+        
+        
+       
+        <script type="text/javascript">
+            
+            function updateOutput(){
+                    $("iframe").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssPanel").val() + "</style></head><body>" + $("#htmlPanel").val() + "</body></html>");
+                
+                document.getElementById("outputPanel").contentWindow.eval($("javascriptPanel").val());       
+            }
+    
+            
+            $(".toggleButton").hover(function() {
+                
+                $(this).addClass("highlightedButton");
+                
+            }, function() {
+                
+                $(this).removeClass("highlightedButton");
+            });
+           
+            $(".toggleButton").click(function(){
+                
+                $(this).toggleClass("active");
+                
+                $(this).removeClass("highlightedButton");
+                
+                var panelID = $(this).attr("id") + "Panel";
+                
+                $("#" + panelID).toggleClass("hidden");
+                
+                var numberOfActivePanels = 4 - $('.hidden').length;
+                
+                $(".panel").width(($(window).width() / numberOfActivePanels) - 10);
+                
+            })
+            
+            $(".panel").height($(window).height() - $("#header").height() - 15);
+            
+            
+            $(".panel").width(($(window).width() / 2) - 10);
+            
+            
+            
+            updateOutput();
+            
+            $("#textarea").on('change keyup paste', function() {
+    
+                updateOutput();
+});
+          
+        </script>
+<!-- 
+
+There was a lot of Rob saying "we haven't done this before so let's google it" so I feel that I got pretty far, considering we haven't done it before and I didn't even know what terms to google to look for the answer.
+
+The differences between Rob's version and my own (Notes to self): 
+
+(1) he put the buttons in the header in divs, I put them in a table. 
+
+(2) he took off the right border of all of those divs completely, I only took it off my "output" cell. It would have helped to have known how to use border-radius specifically for the upper-top-right, upper-top-left, etc. I spent a lot of time trying to figure that out.
+
+(3) he created the jQuery hover before adding the lower part of the page. I tried to use jQuery UI button function to add the hover (unsuccessfully) when I really only needed basic jQuery. I also didn't know about "handlein/handleout" terminology.
+
+(4) Like me, Rob also initially had wrapping of the last column when setting the width to 50%. I though it was because my width was wrong but it was actully because the height was set to 100% of the user's page and we want it set to 100% of user's window. Rob used jQuery for this. He also subtracted some pixels from the width and created iframe.
+
+(5)The iframe is how he is displaying the code in "outputPanel" using this code:  $("iframe").contents().find("html").html('My html'); which was then changed to $("iframe").contents().find("html").html($("htmlPanel").val()); to pull in the html.  
+
+(6)Rob Googled: jquery event when textarea updated . This is how to have the value (val) in the "htmlPanel" change the content immediately in the iframe.
+
+(7) I was really frustrated because my panels would not display and hide when I clicked the coreesponding button. NOTE TO SELF: I AM STILL NOT COMPLETELY CLEAR WHY CHANGING "panel" to "Panel" IN LINE 164 GOT THE TOGGLE WORKING PROPERLY. No where else in the document is Panel capitalized unless it is an ID that is named something like "htmlPanel"
+
+        var panelID = $(this).attr("id") + "Panel";
+
+(8) Changing the code in my panels does not change the outputPanel... Not sure what is incorrect. I have read my code over several times.
+    </body>
+
+</html>
